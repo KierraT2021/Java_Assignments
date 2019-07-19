@@ -1,0 +1,154 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package homework.pkg3;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author Kierra
+ */
+public class ChangeTense {
+    public static void main(String[] args) {
+         Scanner in=new Scanner(System.in);
+        
+        String [] IrregPresent={"eat","flies","speak","shakes","leaves"};
+        String [] IrregPast= {"ate","flew","spoke","shook","left"};
+        String [] TimePresent={"today"};
+        String [] TimePast={"yesterday"};
+        
+        String input="";
+        boolean exit=true;
+        
+        while(exit)
+        {
+            System.out.println("Please enter a sentence or q to quit:");
+            input=in.nextLine();
+            
+            if(input.equals("q"))
+            {
+                System.out.println("BYE!");
+                exit=false;
+            }
+            
+            else
+            {
+                input=input.substring(0,input.length()-1);
+                
+                String[]words=input.split(" ");
+                String replace=null;
+                
+                if(words[1].equals(IrregPresent[3]))
+                {
+                    System.out.println(words[0]+" "+IrregPast[3]+" "+words[2]+".");
+                }
+                
+                else if(words[1].equals(IrregPast[3]))
+                {
+                    System.out.println(words[0]+" "+IrregPresent[3]+" today.");
+                }
+                
+                else if(words.length==4 && words[1].equals("ate"))
+                {
+                    for(int i=0;i<IrregPast.length;i++)
+                    {
+                        if(IrregPast[i].equals(words[1]))
+                        {
+                            replace=IrregPresent[i];
+                            System.out.println(words[0]+" "+replace+" "+words[2]+" today.");
+                            break;
+                        }
+                    }
+                }
+                
+                else if(words.length==4 && words[1].equals("eat"))
+                {
+                    for(int i=0;i<IrregPresent.length;i++)
+                    {
+                        if(IrregPresent[i].equals(words[1]))
+                        {
+                            replace=IrregPast[i];
+                            System.out.println(words[0]+" "+replace+" "+words[2]+" yesterday");
+                            break;
+                            
+                        }
+                    }
+                }
+                
+                else if(words.length==3 && words[2].equals("today"))//Present to past
+                {
+                    for(int i=0;i<IrregPresent.length;i++)
+                    {
+                        if(IrregPresent[i].equals(words[1]))
+                        {
+                            replace=IrregPast[i];
+                        }
+                    }
+                    
+                    if(replace==null)
+                    {  
+                        if(words[1].equals("dances"))
+                    {
+                        words[1].substring(0, words[1].length()-2);
+                        System.out.println(words[0]+" danced yesterday.");
+                    }
+                    
+                    else if(words[1].equals("bake"))
+                    {
+                        System.out.println(words[0]+" "+words[1].substring(0, words[1].length()-1)+"ed yesterday.");
+                    }
+                    else
+                    {
+                        System.out.println(words[0]+" "+words[1]+"ed "+"yesterday.");
+                    }
+                    }
+                    
+                    else
+                    {
+                        System.out.println(words[0]+" "+replace+" yesterday.");
+                    }
+                }
+                
+                else if(words.length==3 && words[2].equals("yesterday"))//Past to present
+                {
+                    for(int i=0;i<IrregPast.length;i++)
+                    {
+                        if(IrregPast[i].equals(words[1]))
+                        {
+                            replace=IrregPresent[i];
+                            break;
+                        }
+                    }
+                    
+                    if(replace==null)
+                    {
+                        if(words[1].equals("danced"))
+                    {
+                        words[1].substring(0, words[1].length()-2);
+                        System.out.println(words[0]+" dances today.");
+                    }
+                    
+                    else if(words[1].equals("baked"))
+                    {
+                        words[1].substring(0, words[1].length()-1);
+                        System.out.println(words[0]+" "+words[1].substring(0, words[1].length()-2)+"e today.");
+                    }
+                    else
+                    {
+                        System.out.println(words[0]+" "+words[1].substring(0, words[1].length()-2)+" "+"today.");
+                    }
+                    }
+                    
+                    else
+                    {
+                        System.out.println(words[0]+" "+replace+" today.");
+                    }
+                } 
+            }
+                
+        }
+    }
+}
