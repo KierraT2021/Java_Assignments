@@ -1,0 +1,81 @@
+/*
+Kierra Thompson
+1001297455
+October 2, 2017
+ */
+package homework.pkg3;
+
+import java.util.*;
+
+/**
+ *
+ * @author Kierra
+ */
+public class CompanyGifts {
+    public static void main(String[] args) {
+       Scanner in=new Scanner(System.in);
+       
+       boolean choice=true;
+       String [] customers=new String[7];
+       int counter=0;
+       
+       while(choice)
+       {
+           System.out.println("***\nEnter the word 'customer' if you are a customer or you ID if you are the manager.");
+           String userinput=in.nextLine().toLowerCase();
+           
+           if(userinput.equals("customer"))
+           {
+               if(customers.length<=counter)
+               {
+                   System.out.println("Sorry, no more customers.");
+               }
+               else
+               {
+                   System.out.println("Hello customer. Please enter your name(first and last) followed by your birthday(MM/DD/YYYY):");
+                   customers[counter]=in.nextLine().toLowerCase();
+                   String [] data=customers[counter].split(" ");
+                   System.out.println("***\nThank you "+data[0].substring(0,1).toUpperCase()+data[0].substring(1, data[0].length())+"!");
+                   counter++;
+               }
+           }
+           
+           else if(userinput.equals("abc 132"))
+           {
+               System.out.println("Hello manager. What would you like to do?");
+               System.out.println("Print to screen or exit?\n***");
+              
+               userinput=in.nextLine().toLowerCase();
+               if(userinput.equals("print to screen"))
+               {
+                   System.out.println("CUSTOMERS");
+                   if(customers[0]==null)
+                   {
+                       System.out.println("Sorry, no customers have entered any information yet.");
+                   }
+                   else
+                   {
+                       for(int i=0;i<customers.length;i++)
+                       {
+                           if(customers[i]!=null)
+                           {
+                             String[]data=customers[i].split(" ");
+                             //System.out.println(customers[i]);
+                             System.out.println("BIRTHDAY: "+data[2]+"        NAME: "+data[1].substring(0,1).toUpperCase()+data[1].substring(1, data[1].length())+", "+data[0].substring(0,1).toUpperCase()+data[0].substring(1, data[0].length()));
+                             
+                           }
+                       }
+                   }
+               }
+               else if(userinput.equals("exit"))
+               {
+                   System.out.println("Bye!");
+                   return;
+               }
+           }
+               
+           }
+       }
+       
+    }
+
