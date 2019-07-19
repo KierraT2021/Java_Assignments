@@ -1,0 +1,128 @@
+import java.util.*;
+
+public class Date {
+    
+    public static String DecToBinary(int userInput)
+    {
+        String binNum="";
+        int dividend=userInput;
+        while(dividend!=0)
+        {
+            binNum=buildNum(dividend)+binNum;
+            dividend=dividend/2;
+        }
+        return binNum;
+    }
+    
+    public static String buildNum(int num)
+    {
+        if(num%2==0)
+        {
+            return "0";
+        }
+        return "1";
+    }
+    
+    public static int BinaryToDec(int userInput)
+    {
+        String binNum=Integer.toString(userInput);
+        int numOfDigits=binNum.length();
+        int answer=0;
+        for(int i=0;i<numOfDigits;i++)
+        {
+            char curNum=binNum.charAt((numOfDigits-1)-i);
+            answer=answer+valueToAdd(curNum, i);
+        }
+        return answer;
+    }
+    
+    public static int valueToAdd(char c, int exp)
+    {
+        int digit=Character.getNumericValue(c);
+        double power=(double)exp;
+        double value=digit*Math.pow(2,power);
+        return (int) value;
+    }
+    
+    public static String getUserInput(String message)
+    {
+        System.out.println(message);
+        Scanner in=new Scanner(System.in);
+         return in.nextLine().toLowerCase();
+    }
+    
+//    public static boolean checkWord(String a,String b)
+//    {
+//        if(a.equals(b))
+//        {
+//            return false;
+//        }
+//        return true;
+//    }
+    public static void main(String [] args)
+    {
+       String Input=getUserInput("***Enter today's date, month followed by day: (b=binary d=decimal)");
+       String [] DateParts=Input.split("\\W+");
+     
+       if(DateParts[0].equals("quit"))
+       {
+          System.out.println("Bye!");
+          return;
+       }
+       
+     while(!DateParts[0].equals("quit"))
+     {
+         
+       if(DateParts.length==3)
+        {
+            int numMonth=Integer.parseInt(DateParts[0]);
+            int numDay=Integer.parseInt(DateParts[1]);
+         
+            if(DateParts[2].equals("d"))
+            {
+                String dateMonToBinary=DecToBinary(numMonth);
+                String dateDayToBinary=DecToBinary(numDay);
+                System.out.println("Date in Binary: "+dateMonToBinary+"/"+dateDayToBinary+"\n");
+                Input=getUserInput("***Enter today's date, month followed by day: (b=binary d=decimal)");
+                DateParts=Input.split("\\W+");
+                if(DateParts[0].equals("quit"))
+                    {
+                        System.out.println("Bye!");
+                        return;
+                    }
+            }
+            
+            else if(DateParts[2].equals("b"))
+            {
+               int dateMonToDecimal=BinaryToDec(numMonth); 
+               int dateDayToDecimal=BinaryToDec(numDay);
+               System.out.println("\nDate in Decimal: "+dateMonToDecimal+"/"+dateDayToDecimal+"\n");
+               Input=getUserInput("***Enter today's date, month followed by day: (b=binary d=decimal)");
+               DateParts=Input.split("\\W+");
+               
+                if(DateParts[0].equals("quit"))
+                {
+                    System.out.println("Bye!");
+                    return;
+                }
+            }  
+             }
+      if(DateParts.length!=3)
+       {
+          System.out.println("Wrong format. Enter again.\n");
+          Input=getUserInput("***Enter today's date, month followed by day: (b=binary d=decimal)");
+          DateParts=Input.split("\\W+");
+           if(DateParts[0].equals("quit"))
+            {
+               System.out.println("Bye!");
+               return;
+            }
+       }
+       if(DateParts[0].equals("quit"))
+       {
+          System.out.println("Bye!");
+          return;
+       }
+       }
+        } 
+     }
