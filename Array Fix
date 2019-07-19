@@ -1,0 +1,68 @@
+package homework6;
+
+import java.util.*;
+
+public class ArrFix { 
+    
+public static int getUserInput()
+{
+Scanner in=new Scanner(System.in);
+boolean done=true;
+int n=0;
+System.out.println("Enter a number or -1 to quit.");
+
+while(done)
+{
+    try
+    {
+     n=in.nextInt();
+     in.nextLine();
+     if(n==(int)n)
+     {
+     done=false;
+     }
+    }
+    catch(Exception e)//Keeps returning 0 when a word is inserted
+    {
+        System.out.println("That is not a number. Please enter a number.");
+        in.nextLine();
+        
+    }
+}
+return n;
+} 
+public static void printOutList(ArrayList<Integer>a)
+{
+    System.out.println("Currently in the list:");
+    for(int i=0;i<a.size();i++)
+    {
+        System.out.printf("%d ", a.get(i));
+    }
+    System.out.println("\n");
+}
+public static void main(String [] args)
+{
+    ArrayList<Integer>numbers= new ArrayList<Integer>();
+    int n;
+    do
+    {
+        n=getUserInput();
+        if(n==-1)
+        {
+            System.out.println("Bye!");
+            return;
+        }
+        else if(numbers.contains(n))//Check if the ArrayList already has the number entered by the user
+        {
+            System.out.println("Already have this number.");
+        }
+        else
+        {
+            numbers.add(n);
+        }
+        printOutList(numbers);
+    }
+    while(n!=-1);
+}
+
+}
