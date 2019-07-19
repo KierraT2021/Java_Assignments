@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class GuessingGame 
+{
+    public static int numGenerate(int n)
+    {
+        Random r=new Random();
+        int random=r.nextInt(n);
+        return random;
+    }
+    
+    public static int getUserInput(String message)
+    {
+        System.out.println(message);
+        Scanner in=new Scanner(System.in);
+        return in.nextInt();
+    }
+    
+    public static boolean compareGuess(int guess, int answer)
+    {
+        if(guess==answer)
+        {
+            return false;
+        }
+        return true;
+    }
+    
+    public static void finalMessage(boolean a, int answer)
+    {
+        if(a==false)
+        {
+            System.out.println("Yes, the number is "+answer+"! You win!");
+        }
+        else
+        {
+            System.out.println("Sorry! :( You lost the game. The goal number was "+answer+".");
+    }
+    }
+        public static void main(String [] args)
+        {
+            System.out.println("Welcome to the guessing game!");
+            System.out.println("You have 3 guesses!");
+            int n=getUserInput("Enter the largest number possible to guess(remember, if you want 5 to be the largest enter one larger-6");
+            int numToGuess=numGenerate(n);
+            int i=0;
+            boolean choice=true;
+            
+            while(i<3&&choice)//This while loop keeps getting skipped
+            {//Fix later
+                int userNumber=getUserInput("Enter your guess: ");
+                choice=compareGuess(userNumber, numToGuess);
+                i++;
+            }
+            finalMessage(choice, numToGuess);
+        }   
+}
